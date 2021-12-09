@@ -115,7 +115,7 @@ private fun PlantDescription(description: String) {
     AndroidView(
         factory = { context ->
             TextView(context).apply {
-                var movementMethod = LinkMovementMethod.getInstance()
+                movementMethod = LinkMovementMethod.getInstance()
             }
         }
     ) {
