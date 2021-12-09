@@ -24,6 +24,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -79,9 +80,9 @@ fun RallyApp() {
 }
 
 @Composable
-private fun RallyNavHost(
+fun RallyNavHost(
     navController: NavHostController,
-    innerPadding: PaddingValues
+    innerPadding: PaddingValues = PaddingValues(0.dp)
 ) {
     NavHost(
         navController = navController,
