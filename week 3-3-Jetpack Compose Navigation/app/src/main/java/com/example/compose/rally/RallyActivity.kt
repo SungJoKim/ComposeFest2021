@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.navigation.navDeepLink
 import com.example.compose.rally.data.UserData
 import com.example.compose.rally.ui.accounts.AccountsBody
 import com.example.compose.rally.ui.accounts.SingleAccountBody
@@ -107,6 +108,23 @@ fun RallyApp() {
                         }
                     )
                 ) { entry -> // Look up "name" in NavBackStackEntry's arguments
+                    val accountName = entry.arguments?.getString("name")
+                    // Find first name match in UserData
+                    val account = UserData.getAccount(accountName)
+                    // Pass account to SingleAccountBody
+                    SingleAccountBody(account = account)
+                }
+                composable(
+                    "$accountsName/{name}",
+                    arguments = listOf(
+                        navArgument("name") {
+                            type = NavType.StringType
+                        },
+                    ),
+                    deepLinks =  listOf(navDeepLink {
+                        uriPattern = "rally://$accountsName/{name}"
+                    })
+                ) { entry ->
                     val accountName = entry.arguments?.getString("name")
                     // Find first name match in UserData
                     val account = UserData.getAccount(accountName)
